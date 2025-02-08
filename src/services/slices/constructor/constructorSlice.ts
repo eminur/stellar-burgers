@@ -84,7 +84,7 @@ export const burgerConstructorSlice = createSlice({
       })
       .addCase(postOrderBurger.fulfilled, (state, action) => {
         state.orderModalData = action.payload;
-        state.orderRequest = true;
+        state.orderRequest = false;
         state.items.bun = null;
         state.items.ingredients = [];
       })
