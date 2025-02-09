@@ -5,6 +5,7 @@ import {
   TOrder
 } from '../../../utils/types';
 import { postOrderBurger } from './constructorActions';
+import { v4 as uuid } from 'uuid';
 
 type TConstructorItems = {
   bun: TIngredient | null;
@@ -35,11 +36,13 @@ export const burgerConstructorSlice = createSlice({
     addBun: (state, action: PayloadAction<TIngredient>) => {
       state.items.bun = action.payload;
     },
-    addIngredient: (state, action: PayloadAction<TIngredient>) => {
-      state.items.ingredients.push({
-        ...action.payload,
-        id: String(state.items.ingredients.length + 1)
-      });
+    addIngredient: {
+      reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
+        state.items.ingredients.push(action.payload);
+      },
+      prepare: (ingredient: TIngredient) => ({
+        payload: { ...ingredient, id: uuid() }
+      })
     },
     removeIngredient: (state, action: PayloadAction<string>) => {
       state.items.ingredients = state.items.ingredients.filter(
@@ -107,3 +110,6 @@ export const {
 
 export const { getBurgerItems, getOrderRequest, getOrderModalData } =
   burgerConstructorSlice.selectors;
+function uuid4(): unknown {
+  throw new Error('Function not implemented.');
+}
