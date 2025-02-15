@@ -93,7 +93,7 @@ export const burgerConstructorSlice = createSlice({
       })
       .addCase(postOrderBurger.rejected, (state, action) => {
         state.orderRequest = false;
-        state.error = action.error.message;
+        state.error = action.error?.message || 'Unknown error';
       });
   }
 });

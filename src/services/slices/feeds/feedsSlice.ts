@@ -33,7 +33,7 @@ export const feedsSlice = createSlice({
       })
       .addCase(fetchFeeds.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error?.message || 'Unknown error';
       });
   }
 });

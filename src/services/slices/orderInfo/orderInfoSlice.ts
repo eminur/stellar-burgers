@@ -34,7 +34,7 @@ export const orderInfoSlice = createSlice({
       })
       .addCase(fetchOrdersByNumber.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error?.message || 'Unknown error';
       });
   }
 });

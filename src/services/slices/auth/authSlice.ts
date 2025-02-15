@@ -39,7 +39,7 @@ export const authSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error?.message || 'Unknown error';
       })
 
       .addCase(register.fulfilled, (state, action) => {
@@ -55,7 +55,7 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isAuthChecked = true;
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error?.message || 'Unknown error';
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
@@ -67,7 +67,7 @@ export const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(logout.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.error = action.error?.message || 'Unknown error';
         state.loading = false;
       })
 
@@ -81,7 +81,7 @@ export const authSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchUser.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.error = action.error?.message || 'Unknown error';
         state.loading = false;
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
@@ -95,7 +95,7 @@ export const authSlice = createSlice({
         state.error = null;
       })
       .addCase(updateUser.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.error = action.error?.message || 'Unknown error';
         state.loading = false;
       })
       .addCase(updateUser.fulfilled, (state, action: PayloadAction<TUser>) => {
